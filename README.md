@@ -19,16 +19,9 @@
 
 - [上手指南](#上手指南)
   - [开发前的配置要求](#开发前的配置要求)
-  - [安装步骤](#安装步骤)
-- [文件目录说明](#文件目录说明)
-- [开发的架构](#开发的架构)
-- [部署](#部署)
-- [使用到的框架](#使用到的框架)
-- [贡献者](#贡献者)
-  - [如何参与开源项目](#如何参与开源项目)
-- [版本控制](#版本控制)
+  - [运行步骤](#运行步骤)
+- [项目介绍](#项目介绍)
 - [作者](#作者)
-- [鸣谢](#鸣谢)
 
 ### 上手指南
 通过autobulid.sh一键编译脚本生成静态库，通过引入相应头文件并链接静态库即可使用RPC框架，example文件夹是RPC提供者和使用者示例代码，根据业务自定义protobuf通信协议， 并实现相应接口即可快速使用
@@ -39,116 +32,25 @@
 ###### 开发前的配置要求
 
 1. 下载protobuf
-2. 下载
+2. 下载zookeeper
 
-###### **安装步骤**
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+###### **运行步骤**
 
 ```sh
-git clone https://github.com/shaojintian/Best_README_template.git
+./autobulid.sh
 ```
 
-### 文件目录说明
-eg:
-
-```
-filetree 
-├── ARCHITECTURE.md
-├── LICENSE.txt
-├── README.md
-├── /account/
-├── /bbs/
-├── /docs/
-│  ├── /rules/
-│  │  ├── backend.txt
-│  │  └── frontend.txt
-├── manage.py
-├── /oa/
-├── /static/
-├── /templates/
-├── useless.md
-└── /util/
-
-```
-
-
-
-
-
-### 开发的架构 
-
-请阅读[ARCHITECTURE.md](https://github.com/shaojintian/Best_README_template/blob/master/ARCHITECTURE.md) 查阅为该项目的架构。
-
-### 部署
-
-暂无
-
-### 使用到的框架
-
-- [xxxxxxx](https://getbootstrap.com)
-- [xxxxxxx](https://jquery.com)
-- [xxxxxxx](https://laravel.com)
-
-### 贡献者
-
-请阅读**CONTRIBUTING.md** 查阅为该项目做出贡献的开发者。
-
-#### 如何参与开源项目
-
-贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是**非常感谢**的。
-
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-### 版本控制
-
-该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
+### 项目介绍
+这个项目就是实现了一个分布式网络通信框架RPC远程调用，网络方面是用的GitHub上面开源的muduo网络库，
+一方面是因为这个网络库的性能比较高效，并且可以很好的解耦网络模块和业务模块，另一方面是因为以前通过
+看书然后也看过这个网络库的部分源码，自己写过网络模块方面的代码，就没有重复造轮子了，
+序列化和反序列化这方面主要是用protobuf，用protobuf主要是因为它不仅提供了序列化的功能而且还可以提供RPC
+服务方法的抽象类，就是提供一个接口，可以很方便的描述RPC方法，这样注册RPC方法和使用RPC方法就很方便，
+通过使用zookeeper实现了服务注册中心，解耦了RPC服务提供方和使用方，zookeeper根节点下的node节点名字
+就是一个服务类的名字，里面的数据就是这个类所在服务器的ip和端口，然后这个node节点下的子节点保存就是这个
+类提供的方法，比如说注册或者登录这样的不同的业务功能，rpc使用方先访问zookeeper拿到提供者的ip,端口就可以
+使用远程调用了。
 
 ### 作者
-
-xxx@xxxx
-
-知乎:xxxx  &ensp; qq:xxxxxx    
-
- *您也可以在贡献者名单中参看所有参与该项目的开发者。*
-
-### 版权说明
-
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt)
-
-### 鸣谢
-
-
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
-- [xxxxxxxxxxxxxx](https://connoratherton.com/loaders)
-
-<!-- links -->
-[your-project-path]:shaojintian/Best_README_template
-[contributors-shield]: https://img.shields.io/github/contributors/shaojintian/Best_README_template.svg?style=flat-square
-[contributors-url]: https://github.com/shaojintian/Best_README_template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shaojintian/Best_README_template.svg?style=flat-square
-[forks-url]: https://github.com/shaojintian/Best_README_template/network/members
-[stars-shield]: https://img.shields.io/github/stars/shaojintian/Best_README_template.svg?style=flat-square
-[stars-url]: https://github.com/shaojintian/Best_README_template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg
-[license-shield]: https://img.shields.io/github/license/shaojintian/Best_README_template.svg?style=flat-square
-[license-url]: https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/shaojintian
-
-
-
-
+wwwp12334
+qq:2232852166@qq.com
